@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email, Quantity and Date Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display:flex;
+            justify-content: center;
+            /* center and baseline both look good here */
+            align-items:center;
+             /*adjusted vh so it doesnt sit TOO centered  */
+            height: 150vh;
+            margin: 0;
+        }
+        form {
+            background-color: #70af519c;
+            padding: 20px;
+            border-radius: 8px;
+            /* 0.9 box shadow just for cool depth */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        }
+        label {
+            font-weight: bold;
+            display:block;
+            margin-bottom: 6px;
+        }
+        input[type="email"],
+        input[type="range"]{
+            /* 90% gives it the best fit. 100% flows out of the edge */
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 12px;
+            /* slight border on the entry section */
+            border: 1px solid #ccc;
+            /* 9px for rounded look */
+            border-radius: 9px;
+        }
+
+        input[type="number"],
+        input[type="date"]{
+            /* 90% gives it the best fit. 100% flows out of the edge */
+            width: 70%;
+            padding: 8px;
+            margin-bottom: 12px;
+            /* slight border on the entry section */
+            border: 1px solid #ccc;
+            /* 9px for rounded look */
+            border-radius: 9px;
+        }
+
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            /* border radius adjustment for roundness */
+            border-radius: 29px;
+            /* cool little grabbing hand for the cursor when it hovers over the button */
+            cursor:grab;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .range-value {
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: -20px;
+            margin-bottom: 12px;
+            margin-left: 3px;
+        }
+
+        .color-value {
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: -10px;
+            margin-bottom: 12px;
+            margin-left: 3px;
+        }
+
+        .radio{
+            font-size: small;
+            align-items: center;
+        }
+        input[type="radio"],
+        input[type="checkbox"]{
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- some ARIA labels placed here depicting the 'required' nature of some of the entries -->
+    <form action="/submit-email" method="POST" aria-labelledby="formTitle">
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required aria-required="true"><br><br>
+
+        <label for="quantity">Quantity</label><br>
+        <input type="number" id="quantity" name="quantity" placeholder="Enter the quantity" min="1" max="100" step="1" required aria-required="true"><br><br>
+        
+        <!-- styling on the tag itself for more controlled output -->
+        <label style="margin: 0%;" for="date">Date</label>
+            <figcaption style="font-size:x-small; padding-bottom: 4px;">select a date</figcaption>
+        <input type="date" id="date" name="Date" placeholder="Enter the date" min="2024-01-01" max="2024-12-31" required aria-required="true"><br><br>
+        
+        <label style="margin: 0%;" for="range">Rating:</label>
+             <!--placeholder is not showing here so adding a figcaption  -->
+             <figcaption style="font-size:x-small; padding-bottom: 4px;">Select Rating 1-10</figcaption>
+             <!-- using 'oninput' to get real time interaction feedback. Added this so that the user can see what number in the 
+            range they have selected. Everythime they interract with the range bar, the number displays below -->
+        <input type="range" id="range" name="range" min="1" max="10" value="5" placeholder="Rate from 1 to 10" oninput="rangevalue.value=value">
+        <div class="range-value">Current Rating: <output id="rangevalue">5</output></div>
+        
+        <label for="color">Select Color:</label>
+        <input class="color-value" type="color" id="color" name="color" value="#f0000"><br><br> <!-- Added color input -->
+        
+        <label for="language">Favorite Programming Language:</label>
+        <select id="language" name="language">
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+            <option value="cpp">C++</option>
+        </select><br><br>
+
+        <div class="radio">
+            <label style="font-size: medium;">Expertise Level:</label>
+            <input type="radio" id="begginer" name="expertise" value="begginer">
+            <label for="begginer">Begginer</label><br>
+            <input type="radio" id="intermediate" name="expertise" value="intermediate">
+            <label for="intermediate">Intermediate</label><br>
+            <input type="radio" id="advanced" name="expertise" value="advanced">
+            <label for="advanced">Advanced</label><br>
+        </div>
+
+        <div class="radio">
+            <label style="font-size: medium;">Preferred Development Platforms:</label>
+            <input type="checkbox" id="web" name="platforms" value="web">
+            <label for="web">Web</label><br>
+            <input type="checkbox" id="mobile" name="platforms" value="mobile">
+            <label for="mobile">Mobile</label><br>
+            <input type="checkbox" id="desktop" name="platforms" value="desktop">
+            <label for="desktop">Desktop</label><br>
+        </div>
+
+        <button aria-label="Submit Button" type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
